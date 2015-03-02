@@ -24,6 +24,11 @@ namespace TunrSync {
 
 		protected async void BtnLogIn_clicked (object sender, EventArgs e)
 		{
+			Application.Invoke (delegate {
+				EntryEmail.Sensitive = false;
+				EntryPassword.Sensitive = false;
+				BtnLogIn.Sensitive = false;
+			});
 			var authResult = await Authenticate (EntryEmail.Text, EntryPassword.Text);
 			if (authResult != null) {
 				Application.Invoke (delegate {
@@ -36,6 +41,9 @@ namespace TunrSync {
 					MessageDialog md = new MessageDialog (this, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "We couldn't log you in! Check your e-mail and password, then try again.");
 					md.Run ();
 					md.Destroy ();
+					EntryEmail.Sensitive = true;
+					EntryPassword.Sensitive = true;
+					BtnLogIn.Sensitive = true;
 				});
 			}
 		}

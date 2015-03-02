@@ -124,6 +124,8 @@ namespace TunrSync
 			}
 			this.Show ();
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+			this.EntryEmail.Activated += new global::System.EventHandler (this.BtnLogIn_clicked);
+			this.EntryPassword.Activated += new global::System.EventHandler (this.BtnLogIn_clicked);
 			this.BtnLogIn.Clicked += new global::System.EventHandler (this.BtnLogIn_clicked);
 		}
 	}
