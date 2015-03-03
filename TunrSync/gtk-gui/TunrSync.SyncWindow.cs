@@ -12,9 +12,9 @@ namespace TunrSync
 		
 		private global::Gtk.Fixed fixed3;
 		
-		private global::Gtk.Label label4;
+		private global::Gtk.Label LabelDisplayName;
 		
-		private global::Gtk.Label label5;
+		private global::Gtk.Label LabelEmail;
 		
 		private global::Gtk.HSeparator hseparator1;
 		
@@ -81,23 +81,23 @@ namespace TunrSync
 			w1.Expand = false;
 			w1.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
-			this.label4 = new global::Gtk.Label ();
-			this.label4.Name = "label4";
-			this.label4.Xalign = 0F;
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("<span size=\"x-large\" weight=\"bold\">Test User</span>");
-			this.label4.UseMarkup = true;
-			this.vbox4.Add (this.label4);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.label4]));
+			this.LabelDisplayName = new global::Gtk.Label ();
+			this.LabelDisplayName.Name = "LabelDisplayName";
+			this.LabelDisplayName.Xalign = 0F;
+			this.LabelDisplayName.LabelProp = global::Mono.Unix.Catalog.GetString ("<span size=\"x-large\" weight=\"bold\">Test User</span>");
+			this.LabelDisplayName.UseMarkup = true;
+			this.vbox4.Add (this.LabelDisplayName);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.LabelDisplayName]));
 			w2.Position = 1;
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
-			this.label5 = new global::Gtk.Label ();
-			this.label5.Name = "label5";
-			this.label5.Xalign = 0F;
-			this.label5.LabelProp = global::Mono.Unix.Catalog.GetString ("testuser@tunr.io");
-			this.vbox4.Add (this.label5);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.label5]));
+			this.LabelEmail = new global::Gtk.Label ();
+			this.LabelEmail.Name = "LabelEmail";
+			this.LabelEmail.Xalign = 0F;
+			this.LabelEmail.LabelProp = global::Mono.Unix.Catalog.GetString ("testuser@tunr.io");
+			this.vbox4.Add (this.LabelEmail);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.LabelEmail]));
 			w3.Position = 2;
 			w3.Expand = false;
 			w3.Fill = false;
@@ -117,8 +117,7 @@ namespace TunrSync
 			this.EntryDirectory = new global::Gtk.Entry ();
 			this.EntryDirectory.CanFocus = true;
 			this.EntryDirectory.Name = "EntryDirectory";
-			this.EntryDirectory.Text = global::Mono.Unix.Catalog.GetString ("C:\\Hayden\\Music");
-			this.EntryDirectory.IsEditable = true;
+			this.EntryDirectory.IsEditable = false;
 			this.EntryDirectory.InvisibleChar = '●';
 			this.hbox3.Add (this.EntryDirectory);
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.EntryDirectory]));
@@ -192,10 +191,10 @@ namespace TunrSync
 			this.scrolledwindow2.ShadowType = ((global::Gtk.ShadowType)(1));
 			// Container child scrolledwindow2.Gtk.Container+ContainerChild
 			this.TextSyncMessages = new global::Gtk.TextView ();
-			this.TextSyncMessages.Buffer.Text = "Hello this is a test\nHello this is a test\nHello this is a test\nHello this is a te" +
-			"st\nHello this is a test\nHello this is a test\nHello this is a test";
 			this.TextSyncMessages.CanFocus = true;
 			this.TextSyncMessages.Name = "TextSyncMessages";
+			this.TextSyncMessages.Editable = false;
+			this.TextSyncMessages.WrapMode = ((global::Gtk.WrapMode)(2));
 			this.scrolledwindow2.Add (this.TextSyncMessages);
 			this.GtkAlignment.Add (this.scrolledwindow2);
 			this.frame1.Add (this.GtkAlignment);
@@ -248,6 +247,7 @@ namespace TunrSync
 			this.DefaultHeight = 320;
 			this.Show ();
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+			this.BtnChangeDirectory.Clicked += new global::System.EventHandler (this.BtnChangeDirectory_clicked);
 		}
 	}
 }

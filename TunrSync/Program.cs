@@ -3,20 +3,18 @@ using Gtk;
 
 namespace TunrSync
 {
-	class Program
+	public class Program
 	{
-		public static readonly int c_md5size = 128 * 1024;
-		#if DEBUG
-			public static readonly string baseurl = "https://dev.tunr.io";
-		#else
-			public static readonly string baseurl = "https://play.tunr.io";
-		#endif
-		public static readonly string apiprefix = "/api";
-
+		public SyncAgent SyncAgent { get; set; }
 		public static void Main (string[] args)
 		{
+			new Program ().start ();
+		}
+
+		public void start() {
 			Application.Init ();
-			LogInWindow win = new LogInWindow ();
+			this.SyncAgent = new SyncAgent ();
+			LogInWindow win = new LogInWindow (this);
 			win.Show ();
 			Application.Run ();
 		}

@@ -167,7 +167,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Label" id="label4">
+                  <widget class="Gtk.Label" id="LabelDisplayName">
                     <property name="MemberName" />
                     <property name="Xalign">0</property>
                     <property name="LabelProp" translatable="yes">&lt;span size="x-large" weight="bold"&gt;Test User&lt;/span&gt;</property>
@@ -181,7 +181,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Label" id="label5">
+                  <widget class="Gtk.Label" id="LabelEmail">
                     <property name="MemberName" />
                     <property name="Xalign">0</property>
                     <property name="LabelProp" translatable="yes">testuser@tunr.io</property>
@@ -212,8 +212,7 @@
                       <widget class="Gtk.Entry" id="EntryDirectory">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
-                        <property name="Text" translatable="yes">C:\Hayden\Music</property>
-                        <property name="IsEditable">True</property>
+                        <property name="IsEditable">False</property>
                         <property name="InvisibleChar">●</property>
                       </widget>
                       <packing>
@@ -231,6 +230,7 @@
                         <property name="Type">TextOnly</property>
                         <property name="Label" translatable="yes">Change...</property>
                         <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="BtnChangeDirectory_clicked" />
                       </widget>
                       <packing>
                         <property name="Position">2</property>
@@ -321,13 +321,9 @@ Upload + Download</property>
                           <widget class="Gtk.TextView" id="TextSyncMessages">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
-                            <property name="Text" translatable="yes">Hello this is a test
-Hello this is a test
-Hello this is a test
-Hello this is a test
-Hello this is a test
-Hello this is a test
-Hello this is a test</property>
+                            <property name="Editable">False</property>
+                            <property name="Text" translatable="yes" />
+                            <property name="WrapMode">Word</property>
                           </widget>
                         </child>
                       </widget>
