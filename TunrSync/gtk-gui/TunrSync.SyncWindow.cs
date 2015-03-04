@@ -34,7 +34,7 @@ namespace TunrSync
 		
 		private global::Gtk.Alignment GtkAlignment;
 		
-		private global::Gtk.ScrolledWindow scrolledwindow2;
+		private global::Gtk.ScrolledWindow ScrollSyncMessages;
 		
 		private global::Gtk.TextView TextSyncMessages;
 		
@@ -184,19 +184,19 @@ namespace TunrSync
 			this.GtkAlignment.Name = "GtkAlignment";
 			this.GtkAlignment.LeftPadding = ((uint)(12));
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			this.scrolledwindow2 = new global::Gtk.ScrolledWindow ();
-			this.scrolledwindow2.CanFocus = true;
-			this.scrolledwindow2.Name = "scrolledwindow2";
-			this.scrolledwindow2.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
-			this.scrolledwindow2.ShadowType = ((global::Gtk.ShadowType)(1));
-			// Container child scrolledwindow2.Gtk.Container+ContainerChild
+			this.ScrollSyncMessages = new global::Gtk.ScrolledWindow ();
+			this.ScrollSyncMessages.CanFocus = true;
+			this.ScrollSyncMessages.Name = "ScrollSyncMessages";
+			this.ScrollSyncMessages.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
+			this.ScrollSyncMessages.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child ScrollSyncMessages.Gtk.Container+ContainerChild
 			this.TextSyncMessages = new global::Gtk.TextView ();
 			this.TextSyncMessages.CanFocus = true;
 			this.TextSyncMessages.Name = "TextSyncMessages";
 			this.TextSyncMessages.Editable = false;
 			this.TextSyncMessages.WrapMode = ((global::Gtk.WrapMode)(2));
-			this.scrolledwindow2.Add (this.TextSyncMessages);
-			this.GtkAlignment.Add (this.scrolledwindow2);
+			this.ScrollSyncMessages.Add (this.TextSyncMessages);
+			this.GtkAlignment.Add (this.ScrollSyncMessages);
 			this.frame1.Add (this.GtkAlignment);
 			this.GtkLabel1 = new global::Gtk.Label ();
 			this.GtkLabel1.Name = "GtkLabel1";
@@ -217,7 +217,6 @@ namespace TunrSync
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.ProgressSync = new global::Gtk.ProgressBar ();
 			this.ProgressSync.Name = "ProgressSync";
-			this.ProgressSync.Fraction = 0.5D;
 			this.hbox1.Add (this.ProgressSync);
 			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.ProgressSync]));
 			w17.Position = 0;
@@ -248,6 +247,7 @@ namespace TunrSync
 			this.Show ();
 			this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 			this.BtnChangeDirectory.Clicked += new global::System.EventHandler (this.BtnChangeDirectory_clicked);
+			this.ButtonSync.Clicked += new global::System.EventHandler (this.ButtonSync_clicked);
 		}
 	}
 }

@@ -6,32 +6,34 @@ using System.Net.Http.Headers;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace TunrSync
 {
 	public class SyncAgent
 	{
-		public static readonly int c_md5size = 128 * 1024;
+		public const int Md5Size = 128 * 1024;
+		public readonly string[] SupportedExtensions = { "*.mp3", "*.ogg", "*.m4a", "*.flac" };
 		#if DEBUG
 			public static readonly string baseurl = "https://dev.tunr.io";
 		#else
 			public static readonly string baseurl = "https://play.tunr.io";
 		#endif
 		public static readonly string apiprefix = "/api";
-		public AuthResponse Authentication { get; set; }
-		public string MusicPath { get; set; }
+
+		// Events
+		public delegate void SyncMessageEventHandler(string message);
+		public event SyncMessageEventHandler OnSyncMessage;
+
+		public delegate void ProgressEventHandler(double progress, string message);
+		public event ProgressEventHandler OnSyncProgress;
+
+		public delegate void SyncCompleteEventHandler();
+		public event SyncCompleteEventHandler OnSyncComplete;
 
 		public SyncAgent ()
 		{
-			MusicPath = GetDefaultMusicPath ();
-		}
-
-		public string GetDefaultMusicPath() {
-			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
-			                  Environment.OSVersion.Platform == PlatformID.MacOSX)
-				? Environment.GetEnvironmentVariable ("HOME")
-				: Environment.ExpandEnvironmentVariables ("%HOMEDRIVE%%HOMEPATH%");
-			return Path.Combine (homePath, "Music");
 		}
 
 		public async Task<bool> Authenticate (string username, string password)
@@ -53,7 +55,7 @@ namespace TunrSync
 				{
 					var authString = await response.Content.ReadAsStringAsync();
 					var auth = JsonConvert.DeserializeObject<AuthResponse>(authString);
-					this.Authentication = auth;
+					Configuration.Current.Authentication = auth;
 					return true;
 				}
 				else
@@ -61,6 +63,36 @@ namespace TunrSync
 					return false;
 				}
 			}
+		}
+
+		public void sync() {
+			ScanLibrary ();
+			OnSyncComplete ();
+		}
+
+		private Dictionary<string, FileInfo> ScanLibrary()
+		{
+			OnSyncMessage ("Searching for files...");
+			var directory = new DirectoryInfo (Configuration.Current.SyncDirectory);
+			var files = SupportedExtensions.AsParallel().SelectMany(searchPattern =>
+				directory.EnumerateFiles(searchPattern, 
+					SearchOption.AllDirectories));
+			OnSyncMessage ("Found " + files.Count() + " files in sync directory.");
+			OnSyncMessage ("Indexing files ...");
+			var localIndex = new Dictionary<string, FileInfo> ();
+			int processedCount = 0;
+			foreach (var file in files) {
+				var hash = Md5Hash.Md5HashFile (file.FullName);
+				if (!localIndex.ContainsKey (hash)) {
+					localIndex.Add (hash, file);
+				}
+				processedCount++;
+				OnSyncProgress ((processedCount / (double)files.Count ()) * 0.25, 
+					"Indexed " + processedCount + "/" + files.Count () + "...");
+				OnSyncMessage ("Indexed '" + file.Name + "'...");
+			}
+			OnSyncMessage ("Indexing complete.");
+			return localIndex;
 		}
 	}
 }

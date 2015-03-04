@@ -11,11 +11,17 @@ namespace TunrSync
 			new Program ().start ();
 		}
 
-		public void start() {
+		public void start()
+		{
 			Application.Init ();
 			this.SyncAgent = new SyncAgent ();
-			LogInWindow win = new LogInWindow (this);
-			win.Show ();
+			if (Configuration.Current.Authentication == null) {
+				LogInWindow win = new LogInWindow (this);
+				win.Show ();
+			} else {
+				SyncWindow syncwin = new SyncWindow (this);
+				syncwin.Show ();
+			}
 			Application.Run ();
 		}
 	}

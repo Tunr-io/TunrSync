@@ -71,6 +71,8 @@
     <Compile Include="gtk-gui\TunrSync.LogInWindow.cs" />
     <Compile Include="SyncAgent.cs" />
     <Compile Include="Models\AuthResponse.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Md5Hash.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
