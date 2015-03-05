@@ -7,7 +7,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TunrSync</RootNamespace>
     <AssemblyName>TunrSync</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <StartupObject>TunrSync.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -73,6 +73,7 @@
     <Compile Include="Models\AuthResponse.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Md5Hash.cs" />
+    <Compile Include="Models\Song.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

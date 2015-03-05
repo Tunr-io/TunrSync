@@ -73,7 +73,7 @@ namespace TunrSync
 		{
 			ButtonSync.Sensitive = false;
 			Task.Run (() => {
-				_program.SyncAgent.sync ();
+				_program.SyncAgent.Sync ();
 			});
 		}
 	}
